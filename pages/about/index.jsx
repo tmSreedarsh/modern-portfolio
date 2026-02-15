@@ -210,8 +210,19 @@ export const aboutData = [
 const About = () => {
   const [index, setIndex] = useState(0);
   const touchStart = useRef({ x: 0, y: 0, ignoreSwipe: false });
-  const tabRefs = useRef([]);
   const contentScrollRef = useRef(null);
+
+  const mobileTabLabel = (title) => {
+    const labels = {
+      Experience: "Exp",
+      "Research Focus": "Research",
+      Publications: "Pubs",
+      Conferences: "Conf",
+      Certifications: "Certs",
+    };
+
+    return labels[title] || title;
+  };
 
   const goNextSection = () => {
     setIndex((prev) => Math.min(prev + 1, aboutData.length - 1));
@@ -253,15 +264,6 @@ const About = () => {
   };
 
   useEffect(() => {
-    const activeTab = tabRefs.current[index];
-    if (activeTab) {
-      activeTab.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    }
-
     // Keep every section consistent: start at top when switching tabs.
     if (contentScrollRef.current) {
       contentScrollRef.current.scrollTo({ top: 0, behavior: "auto" });
@@ -272,14 +274,14 @@ const About = () => {
     // MASTER LAYOUT: 
     // h-full: Fills the layout viewport while keeping internal section scrolling.
     // flex flex-col: Stacks elements vertically.
-    <div className="h-full h-[100dvh] bg-primary/30 text-center xl:text-left relative z-10 flex flex-col overflow-hidden">
+    <div className="h-full h-[100dvh] bg-primary/30 text-center xl:text-left relative z-10 flex flex-col overflow-hidden overflow-x-hidden">
       
       {/* Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Circles />
       </div>
 
-      <div className="container mx-auto h-full flex flex-col px-4 sm:px-6 md:px-8 xl:px-0 relative z-20">
+      <div className="container mx-auto max-w-full h-full flex flex-col px-4 sm:px-6 md:px-8 xl:px-0 relative z-20">
         
         {/* 1. HEADER SPACER */}
         {/* Pushes everything down so it doesn't hide behind your name */}
@@ -291,27 +293,38 @@ const About = () => {
             
             {/* TABS ROW */}
             <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
-                <div className="relative">
-                <div className="flex flex-nowrap md:flex-wrap xl:flex-nowrap overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory justify-start gap-2 sm:gap-3 md:gap-x-4 md:gap-y-2 xl:gap-x-6 border-b border-white/10 pb-2 pr-6 md:pr-0 items-center">
+                <div className="grid grid-cols-4 gap-x-2 gap-y-2 border-b border-white/10 pb-2 md:hidden">
                     {aboutData.map((item, itemI) => (
-                    <button
+                      <button
                         type="button"
-                        ref={(el) => {
-                          tabRefs.current[itemI] = el;
-                        }}
                         key={itemI}
                         className={`${
-                        index === itemI &&
-                        "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                        } cursor-pointer text-xs sm:text-sm xl:text-base relative after:w-6 sm:after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0 snap-start transition-all duration-300 py-1 px-1 hover:text-white font-medium`}
+                          index === itemI &&
+                          "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
+                        } cursor-pointer text-[11px] relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap transition-all duration-300 py-1 hover:text-white font-medium`}
                         onClick={() => setIndex(itemI)}
-                    >
-                        {item.title}
-                    </button>
+                      >
+                        {mobileTabLabel(item.title)}
+                      </button>
                     ))}
                 </div>
-                <div className="md:hidden pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-primary/80 to-transparent" />
+
+                <div className="hidden md:flex md:flex-wrap xl:flex-nowrap overflow-x-auto md:overflow-visible no-scrollbar justify-start gap-2 sm:gap-3 md:gap-x-4 md:gap-y-2 xl:gap-x-6 border-b border-white/10 pb-2 pr-6 md:pr-0 items-center">
+                    {aboutData.map((item, itemI) => (
+                      <button
+                        type="button"
+                        key={itemI}
+                        className={`${
+                          index === itemI &&
+                          "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
+                        } cursor-pointer text-sm xl:text-base relative after:w-6 sm:after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0 transition-all duration-300 py-1 px-1 hover:text-white font-medium`}
+                        onClick={() => setIndex(itemI)}
+                      >
+                        {item.title}
+                      </button>
+                    ))}
                 </div>
+
                 <div className="md:hidden mt-1 text-white/40 text-[10px] italic flex items-center justify-center gap-2 animate-pulse">
                     <FaHandPointLeft /> Swipe left/right to change section
                 </div>
