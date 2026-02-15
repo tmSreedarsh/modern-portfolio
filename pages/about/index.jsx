@@ -214,7 +214,9 @@ const About = () => {
 
   const mobileTabLabel = (title) => {
     const labels = {
+      Education: "Edu",
       Experience: "Exp",
+      Projects: "Proj",
       "Research Focus": "Research",
       Publications: "Pubs",
       Conferences: "Conf",
@@ -293,20 +295,23 @@ const About = () => {
             
             {/* TABS ROW */}
             <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
-                <div className="grid grid-cols-4 gap-x-2 gap-y-2 border-b border-white/10 pb-2 md:hidden">
-                    {aboutData.map((item, itemI) => (
-                      <button
-                        type="button"
-                        key={itemI}
-                        className={`${
-                          index === itemI &&
-                          "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                        } cursor-pointer text-[11px] relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap transition-all duration-300 py-1 hover:text-white font-medium`}
-                        onClick={() => setIndex(itemI)}
-                      >
-                        {mobileTabLabel(item.title)}
-                      </button>
-                    ))}
+                <div className="md:hidden relative overflow-hidden">
+                    <div className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x snap-x snap-mandatory gap-3 border-b border-white/10 pb-2 px-1">
+                      {aboutData.map((item, itemI) => (
+                        <button
+                          type="button"
+                          key={itemI}
+                          className={`${
+                            index === itemI &&
+                            "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
+                          } cursor-pointer text-xs relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap flex-none snap-start transition-all duration-300 py-1 hover:text-white font-medium`}
+                          onClick={() => setIndex(itemI)}
+                        >
+                          {mobileTabLabel(item.title)}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-primary/80 to-transparent" />
                 </div>
 
                 <div className="hidden md:flex md:flex-wrap xl:flex-nowrap overflow-x-auto md:overflow-visible no-scrollbar justify-start gap-2 sm:gap-3 md:gap-x-4 md:gap-y-2 xl:gap-x-6 border-b border-white/10 pb-2 pr-6 md:pr-0 items-center">
@@ -325,8 +330,28 @@ const About = () => {
                     ))}
                 </div>
 
-                <div className="md:hidden mt-1 text-white/40 text-[10px] italic flex items-center justify-center gap-2 animate-pulse">
-                    <FaHandPointLeft /> Swipe left/right to change section
+                <div data-swipe-ignore="true" className="md:hidden mt-2 flex items-center justify-center">
+                    <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2 py-1">
+                        {aboutData.map((item, itemI) => (
+                          <button
+                            type="button"
+                            key={`${item.title}-dot`}
+                            className="relative h-2 w-2"
+                            onClick={() => setIndex(itemI)}
+                            aria-label={`Go to ${item.title}`}
+                          >
+                            {index === itemI ? (
+                              <motion.span
+                                layoutId="about-active-dot"
+                                className="absolute inset-0 rounded-full bg-accent shadow-[0_0_8px_rgba(241,48,36,0.8)]"
+                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                              />
+                            ) : (
+                              <span className="absolute inset-0 rounded-full bg-white/35" />
+                            )}
+                          </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
