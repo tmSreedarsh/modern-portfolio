@@ -256,20 +256,6 @@ const About = () => {
     if (contentScrollRef.current) {
       contentScrollRef.current.scrollTo({ top: 0, behavior: "auto" });
     }
-
-    // Keep active mobile tab centered when section changes via swipe or dots.
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
-      const activeMobileTab = document.querySelector(
-        `[data-mobile-tab-index='${index}']`
-      );
-      if (activeMobileTab) {
-        activeMobileTab.scrollIntoView({
-          behavior: "smooth",
-          inline: "center",
-          block: "nearest",
-        });
-      }
-    }
   }, [index]);
 
   return (
@@ -296,16 +282,15 @@ const About = () => {
             {/* TABS ROW */}
             <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
                 <div className="md:hidden relative overflow-hidden">
-                    <div className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x snap-x snap-mandatory scroll-smooth gap-3 border-b border-white/10 pb-2 px-2">
+                    <div className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-0">
                       {aboutData.map((item, itemI) => (
                         <button
                           type="button"
                           key={itemI}
-                          data-mobile-tab-index={itemI}
                           className={`${
                             index === itemI &&
                             "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                          } cursor-pointer text-[11px] relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap flex-none snap-start transition-all duration-300 py-1 hover:text-white font-medium`}
+                          } cursor-pointer text-xs relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap flex-none transition-all duration-300 py-1 hover:text-white font-medium`}
                           onClick={() => setIndex(itemI)}
                         >
                           {item.title}
