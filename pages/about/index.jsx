@@ -307,7 +307,7 @@ const About = () => {
         
         {/* 1. HEADER SPACER */}
         {/* Pushes everything down so it doesn't hide behind your name */}
-        <div className="shrink-0 h-[clamp(140px,22vh,168px)] sm:h-[clamp(150px,20vh,176px)] lg:h-[120px] xl:h-[150px]"></div>
+        <div className="shrink-0 h-[clamp(122px,19vh,148px)] sm:h-[clamp(130px,18vh,156px)] lg:h-[108px] xl:h-[136px]"></div>
 
         {/* 2. MAIN CONTENT (Expands to fill space) */}
         {/* min-h-0 is CRITICAL: It allows the inner content to scroll while the parent stays fixed. */}
