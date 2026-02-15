@@ -402,21 +402,21 @@ const About = () => {
                     {/* TABLE LOGIC */}
                     {aboutData[index].title === 'Education' ? (
                         <div className="w-full flex flex-col gap-3">
-                            <div className="md:hidden w-full space-y-3">
+                            <div className="md:hidden w-full space-y-2">
                                 {aboutData[index].info.map((row, i) => (
-                                    <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-3 text-left shadow-lg">
-                                        <div className="grid grid-cols-[84px_1fr] gap-x-2 gap-y-2 text-xs sm:text-sm">
+                                    <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-2.5 text-left shadow-lg">
+                                        <div className="grid grid-cols-[76px_1fr] gap-x-2 gap-y-1.5 text-[11px] sm:text-xs">
                                             <span className="uppercase tracking-wide text-white/50">Degree</span>
-                                            <span className="font-bold text-white">{row.degree}</span>
+                                            <span className="font-bold text-accent leading-tight">{row.degree}</span>
 
                                             <span className="uppercase tracking-wide text-white/50">University</span>
-                                            <span className="text-white/80">{row.university}</span>
+                                            <span className="text-white/80 leading-tight">{row.university}</span>
 
                                             <span className="uppercase tracking-wide text-white/50">Stream</span>
-                                            <span className="whitespace-pre-line leading-relaxed text-white/80">{row.specialization}</span>
+                                            <span className="whitespace-pre-line leading-snug text-white/80">{row.specialization}</span>
 
                                             <span className="uppercase tracking-wide text-white/50">Year</span>
-                                            <span className="font-bold text-accent">{row.year}</span>
+                                            <span className="font-bold text-accent leading-tight">{row.year}</span>
                                         </div>
                                     </div>
                                 ))}
