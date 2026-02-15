@@ -222,10 +222,14 @@ const About = () => {
     if (!tabsScroller || !activeTab) return;
     if (tabsScroller.scrollWidth <= tabsScroller.clientWidth) return;
 
-    activeTab.scrollIntoView({
+    const targetLeft =
+      activeTab.offsetLeft + activeTab.offsetWidth / 2 - tabsScroller.clientWidth / 2;
+    const maxScrollLeft = tabsScroller.scrollWidth - tabsScroller.clientWidth;
+    const nextScrollLeft = Math.max(0, Math.min(targetLeft, maxScrollLeft));
+
+    tabsScroller.scrollTo({
+      left: nextScrollLeft,
       behavior,
-      inline: "center",
-      block: "nearest",
     });
   };
 
@@ -315,7 +319,7 @@ const About = () => {
                 <div className="md:hidden relative overflow-hidden">
                     <div
                       ref={mobileTabsScrollRef}
-                      className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-0"
+                      className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-1"
                     >
                       {aboutData.map((item, itemI) => (
                         <button
