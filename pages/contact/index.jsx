@@ -1,22 +1,27 @@
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { fadeIn } from "../../variants";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const form = useRef();
 
+  useEffect(() => {
+    // 1. YOUR REAL PUBLIC KEY (Verified)
+    emailjs.init("CkLM7KChXGE_7b40V");
+  }, []);
+
   const sendEmail = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     emailjs.sendForm(
-      "service_d46tto5",       // ✅ Service ID is CORRECT
-      "PASTE_YOUR_TEMPLATE_ID_HERE", // ❌ DELETE THIS TEXT AND PASTE YOUR ID
+      "service_d46tto5",       // 2. YOUR REAL SERVICE ID
+      "q3aqyno",               // 3. YOUR REAL TEMPLATE ID (From your dashboard)
       form.current,
-      "CkLM7KChXGE_7b40V"      // ✅ Public Key is CORRECT
+      "CkLM7KChXGE_7b40V"      // 4. Public Key (Safety backup)
     )
     .then((result) => {
         alert("Message sent successfully!");
@@ -52,7 +57,7 @@ const Contact = () => {
             autoComplete="off"
             autoCapitalize="off"
           >
-            {/* HIDDEN INPUT for Subject Line */}
+            {/* HIDDEN INPUT: Helps match the 'Subject' line in your email settings */}
             <input type="hidden" name="title" value="New Portfolio Inquiry" />
 
             <div className="flex gap-x-6 w-full">
@@ -96,7 +101,6 @@ const Contact = () => {
               <span className="group-hover:-translate-y-[120%] group-hover:opacity-0 transition-all duration-500">
                 Let's talk
               </span>
-
               <BsArrowRight
                 className="-translate-y-[120%] opacity-0 group-hover:flex group-hover:-translate-y-0 group-hover:opacity-100 transition-all duration-300 absolute text-[22px]"
                 aria-hidden
