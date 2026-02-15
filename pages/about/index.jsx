@@ -489,10 +489,10 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(136px+env(safe-area-inset-bottom))] sm:pb-[calc(124px+env(safe-area-inset-bottom))] md:pb-[calc(116px+env(safe-area-inset-bottom))] lg:pb-[calc(112px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
-            <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 items-start">
+        <div className="shrink-0 w-full border-t border-white/10 pt-2 md:pt-3 pb-[calc(104px+env(safe-area-inset-bottom))] sm:pb-[calc(100px+env(safe-area-inset-bottom))] md:pb-[calc(96px+env(safe-area-inset-bottom))] lg:pb-[calc(94px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
+            <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 items-start">
                 
-                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={8} /> +
                     </div>
@@ -502,7 +502,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={5} />
                     </div>
@@ -511,7 +511,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={1} duration={5} /> +
                     </div>
@@ -521,7 +521,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="pl-1 sm:pl-2 md:pl-4 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                <div className="pl-1 sm:pl-2 md:pl-4 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={23} duration={5} /> +
                     </div>
