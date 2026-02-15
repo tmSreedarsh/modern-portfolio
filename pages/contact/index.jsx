@@ -1,16 +1,14 @@
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { fadeIn } from "../../variants";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    // YOUR REAL PUBLIC KEY (From your screenshot)
-    emailjs.init("CkLM7KChXGE_7b40V"); 
-  }, []);
+  // REMOVED useEffect. We don't need it anymore.
+  // We will pass the key directly in the send function below.
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,26 +17,28 @@ const Contact = () => {
     const formData = {
       name: event.target.name.value,
       email: event.target.email.value,
-      // Your template uses {{title}} for the email subject line
-      title: event.target.subject.value, 
-      subject: event.target.subject.value, 
+      title: event.target.subject.value, // Matches {{title}} in your subject line
+      subject: event.target.subject.value, // Matches {{subject}} in your body
       message: event.target.message.value,
     };
 
+    // The 4th argument here ("CkLM7KChXGE_7b40V") forces the key to work
     emailjs
       .send(
-        "service_d46tto5", // YOUR REAL SERVICE ID
-        "q3aqyno",         // YOUR REAL TEMPLATE ID
-        formData
+        "service_d46tto5",       // Service ID
+        "q3aqyno",               // Template ID
+        formData,
+        "CkLM7KChXGE_7b40V"      // Public Key (Directly here is SAFER)
       )
       .then(
         (response) => {
-          alert("Thank you. I will get back to you ASAP.");
+          console.log("SUCCESS!", response.status, response.text);
+          alert("Message sent successfully!");
           event.target.reset();
         },
         (error) => {
-          alert("Failed to send message. Please try again.");
           console.log("FAILED...", error);
+          alert("Failed to send message. Check console for details.");
         }
       )
       .finally(() => setIsLoading(false));
@@ -47,9 +47,7 @@ const Contact = () => {
   return (
     <div className="h-full bg-primary/30">
       <div className="container mx-auto py-32 text-center xl:text-left flex items-center justify-center h-full">
-        {/* text & form */}
         <div className="flex flex-col w-full max-w-[700px]">
-          {/* text */}
           <motion.h2
             variants={fadeIn("up", 0.2)}
             initial="hidden"
@@ -60,7 +58,6 @@ const Contact = () => {
             Let's <span className="text-accent">Collaborate.</span>
           </motion.h2>
 
-          {/* form */}
           <motion.form
             variants={fadeIn("up", 0.4)}
             initial="hidden"
@@ -72,7 +69,6 @@ const Contact = () => {
             autoCapitalize="off"
             name="contact"
           >
-            {/* input group */}
             <div className="flex gap-x-6 w-full">
               <input
                 type="text"
