@@ -496,9 +496,9 @@ const About = () => {
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={8} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
-                        <span className="md:hidden">Years</span>
-                        <span className="hidden md:inline">Years Exp.</span>
+                    <div className="text-[7px] sm:text-[8px] md:text-xs uppercase tracking-[0.5px] md:tracking-[1px] text-white/90 font-medium leading-tight">
+                        <span className="md:hidden">Experience</span>
+                        <span className="hidden md:inline">Years Experience</span>
                     </div>
                 </div>
 
@@ -506,7 +506,7 @@ const About = () => {
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={5} />
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
+                    <div className="text-[7px] sm:text-[8px] md:text-xs uppercase tracking-[0.5px] md:tracking-[1px] text-white/90 font-medium leading-tight">
                         Projects
                     </div>
                 </div>
@@ -515,9 +515,8 @@ const About = () => {
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={1} duration={5} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
-                        <span className="md:hidden">Pubs</span>
-                        <span className="hidden md:inline">Publications</span>
+                    <div className="text-[7px] sm:text-[8px] md:text-xs uppercase tracking-[0.5px] md:tracking-[1px] text-white/90 font-medium leading-tight">
+                        Publications
                     </div>
                 </div>
 
@@ -525,9 +524,8 @@ const About = () => {
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={23} duration={5} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
-                        <span className="md:hidden">Certs</span>
-                        <span className="hidden md:inline">Credentials</span>
+                    <div className="text-[7px] sm:text-[8px] md:text-xs uppercase tracking-[0.5px] md:tracking-[1px] text-white/90 font-medium leading-tight">
+                        Credentials
                     </div>
                 </div>
 
