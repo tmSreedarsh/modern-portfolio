@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
 
@@ -209,12 +209,64 @@ export const aboutData = [
 
 const About = () => {
   const [index, setIndex] = useState(0);
+  const touchStart = useRef({ x: 0, y: 0, ignoreSwipe: false });
+  const tabRefs = useRef([]);
+
+  const goNextSection = () => {
+    setIndex((prev) => Math.min(prev + 1, aboutData.length - 1));
+  };
+
+  const goPrevSection = () => {
+    setIndex((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    const ignoreSwipe =
+      e.target instanceof Element &&
+      Boolean(e.target.closest('[data-swipe-ignore="true"]'));
+
+    touchStart.current = { x: touch.clientX, y: touch.clientY, ignoreSwipe };
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStart.current.ignoreSwipe) {
+      touchStart.current.ignoreSwipe = false;
+      return;
+    }
+
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStart.current.x;
+    const deltaY = touch.clientY - touchStart.current.y;
+
+    // Switch sections only for intentional horizontal swipes.
+    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) {
+      return;
+    }
+
+    if (deltaX < 0) {
+      goNextSection();
+    } else {
+      goPrevSection();
+    }
+  };
+
+  useEffect(() => {
+    const activeTab = tabRefs.current[index];
+    if (activeTab) {
+      activeTab.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [index]);
 
   return (
     // MASTER LAYOUT: 
     // h-full: Fills the layout viewport while keeping internal section scrolling.
     // flex flex-col: Stacks elements vertically.
-    <div className="h-full bg-primary/30 text-center xl:text-left relative z-10 flex flex-col overflow-hidden">
+    <div className="h-full h-[100dvh] bg-primary/30 text-center xl:text-left relative z-10 flex flex-col overflow-hidden">
       
       {/* Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -225,40 +277,41 @@ const About = () => {
         
         {/* 1. HEADER SPACER */}
         {/* Pushes everything down so it doesn't hide behind your name */}
-        <div className="shrink-0 h-[168px] sm:h-[176px] lg:h-[120px] xl:h-[150px]"></div>
+        <div className="shrink-0 h-[clamp(140px,22vh,168px)] sm:h-[clamp(150px,20vh,176px)] lg:h-[120px] xl:h-[150px]"></div>
 
         {/* 2. MAIN CONTENT (Expands to fill space) */}
         {/* min-h-0 is CRITICAL: It allows the inner content to scroll while the parent stays fixed. */}
-        <div className="flex-1 flex flex-col min-h-0">
+        <div
+          className="flex-1 flex flex-col min-h-0 touch-pan-y"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
             
             {/* TABS ROW */}
             <div className="shrink-0 mb-3 xl:mb-6">
                 <div className="relative">
                 <div className="flex flex-nowrap md:flex-wrap xl:flex-nowrap overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory justify-start gap-2 sm:gap-3 md:gap-x-4 md:gap-y-2 xl:gap-x-6 border-b border-white/10 pb-2 pr-6 md:pr-0 items-center">
                     {aboutData.map((item, itemI) => (
-                    <div
+                    <button
+                        type="button"
+                        ref={(el) => {
+                          tabRefs.current[itemI] = el;
+                        }}
                         key={itemI}
                         className={`${
                         index === itemI &&
                         "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
                         } cursor-pointer text-xs sm:text-sm xl:text-base relative after:w-6 sm:after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0 snap-start transition-all duration-300 py-1 px-1 hover:text-white font-medium`}
-                        onClick={(e) => {
-                            setIndex(itemI);
-                            e.currentTarget.scrollIntoView({
-                              behavior: "smooth",
-                              inline: "center",
-                              block: "nearest",
-                            });
-                        }}
+                        onClick={() => setIndex(itemI)}
                     >
                         {item.title}
-                    </div>
+                    </button>
                     ))}
                 </div>
                 <div className="md:hidden pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-primary/80 to-transparent" />
                 </div>
                 <div className="md:hidden mt-1 text-white/40 text-[10px] italic flex items-center justify-center gap-2 animate-pulse">
-                    <FaHandPointLeft /> Swipe tabs to view more
+                    <FaHandPointLeft /> Swipe left/right to change section
                 </div>
             </div>
 
@@ -275,7 +328,7 @@ const About = () => {
                     {/* TABLE LOGIC */}
                     {aboutData[index].title === 'Education' ? (
                         <div className="w-full flex flex-col">
-                            <div className="w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative shadow-lg">
+                            <div data-swipe-ignore="true" className="w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative shadow-lg">
                                 <table className="w-full text-left text-white/80 border-collapse min-w-[520px] md:min-w-[680px]">
                                     <thead>
                                         <tr className="bg-white/10 text-accent text-[10px] sm:text-xs md:text-sm uppercase tracking-wider">
@@ -345,42 +398,45 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(92px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(84px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4">
                 
-                <div className="md:pr-4 md:border-r md:border-white/10 text-center md:text-left">
-                    <div className="text-lg sm:text-xl md:text-3xl font-extrabold text-accent mb-1">
+                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
                         <CountUp start={0} end={3} duration={8} /> +
                     </div>
-                    <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
-                        Years Exp.
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                        <span className="md:hidden">Years</span>
+                        <span className="hidden md:inline">Years Exp.</span>
                     </div>
                 </div>
 
-                <div className="md:px-4 md:border-r md:border-white/10 text-center md:text-left">
-                    <div className="text-lg sm:text-xl md:text-3xl font-extrabold text-accent mb-1">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
                         <CountUp start={0} end={3} duration={5} />
                     </div>
-                    <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
                         Projects
                     </div>
                 </div>
 
-                <div className="md:px-4 md:border-r md:border-white/10 text-center md:text-left">
-                    <div className="text-lg sm:text-xl md:text-3xl font-extrabold text-accent mb-1">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
                         <CountUp start={0} end={1} duration={5} /> +
                     </div>
-                    <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
-                        Publications
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                        <span className="md:hidden">Pubs</span>
+                        <span className="hidden md:inline">Publications</span>
                     </div>
                 </div>
 
-                <div className="md:pl-4 text-center md:text-left">
-                    <div className="text-lg sm:text-xl md:text-3xl font-extrabold text-accent mb-1">
+                <div className="pl-1 sm:pl-2 md:pl-4 text-center">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
                         <CountUp start={0} end={23} duration={5} /> +
                     </div>
-                    <div className="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
-                        Credentials
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                        <span className="md:hidden">Certs</span>
+                        <span className="hidden md:inline">Credentials</span>
                     </div>
                 </div>
 
