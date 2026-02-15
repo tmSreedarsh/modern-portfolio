@@ -65,7 +65,7 @@ const Work = () => {
                  target="_blank" 
                  className="flex items-center gap-x-2 text-white hover:text-accent transition-all group cursor-pointer justify-center lg:justify-start"
                >
-                 <span className="text-xl animate-bounce">
+                 <span className="text-xl text-accent animate-bounce">
                    <BsFileEarmarkPdf/>
                  </span>
                  <span className="border-b border-white/40 group-hover:border-accent text-xs tracking-widest uppercase font-bold">
