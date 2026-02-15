@@ -6,8 +6,7 @@ import CountUp from "react-countup";
 import { 
   FaPython, 
   FaGitAlt, 
-  FaGlobeAmericas,
-  FaHandPointLeft
+  FaGlobeAmericas
 } from "react-icons/fa";
 
 import { 
@@ -402,9 +401,29 @@ const About = () => {
                 >
                     {/* TABLE LOGIC */}
                     {aboutData[index].title === 'Education' ? (
-                        <div className="w-full flex flex-col">
-                            <div data-swipe-ignore="true" className="w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative shadow-lg">
-                                <table className="w-full text-left text-white/80 border-collapse min-w-[520px] md:min-w-[680px]">
+                        <div className="w-full flex flex-col gap-3">
+                            <div className="md:hidden w-full space-y-3">
+                                {aboutData[index].info.map((row, i) => (
+                                    <div key={i} className="rounded-lg border border-white/10 bg-white/5 p-3 text-left shadow-lg">
+                                        <div className="grid grid-cols-[84px_1fr] gap-x-2 gap-y-2 text-xs sm:text-sm">
+                                            <span className="uppercase tracking-wide text-white/50">Degree</span>
+                                            <span className="font-bold text-white">{row.degree}</span>
+
+                                            <span className="uppercase tracking-wide text-white/50">University</span>
+                                            <span className="text-white/80">{row.university}</span>
+
+                                            <span className="uppercase tracking-wide text-white/50">Stream</span>
+                                            <span className="whitespace-pre-line leading-relaxed text-white/80">{row.specialization}</span>
+
+                                            <span className="uppercase tracking-wide text-white/50">Year</span>
+                                            <span className="font-bold text-accent">{row.year}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div data-swipe-ignore="true" className="hidden md:block w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative shadow-lg">
+                                <table className="w-full text-left text-white/80 border-collapse min-w-[680px]">
                                     <thead>
                                         <tr className="bg-white/10 text-accent text-[10px] sm:text-xs md:text-sm uppercase tracking-wider">
                                             <th className="py-2.5 px-2 sm:px-3 md:px-4 font-bold border-b border-white/10">Degree</th>
@@ -424,9 +443,6 @@ const About = () => {
                                         ))}
                                     </tbody>
                                 </table>
-                            </div>
-                            <div className="md:hidden mt-2 text-white/40 text-[9px] sm:text-[10px] italic flex items-center justify-center gap-2 animate-pulse">
-                                <FaHandPointLeft /> Swipe table to see details
                             </div>
                         </div>
                     ) : (
