@@ -1,50 +1,30 @@
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { fadeIn } from "../../variants";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const form = useRef();
 
-  // Initialize once on load
-  useEffect(() => {
-    emailjs.init("CkLM7KChXGE_7b40V");
-  }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
     setIsLoading(true);
 
-    const formData = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      // We map 'subject' to 'title' because your template expects {{title}}
-      title: event.target.subject.value, 
-      subject: event.target.subject.value,
-      message: event.target.message.value,
-    };
-
-    emailjs
-      .send(
-        "service_d46tto5",     // Service ID
-        "q3aqyno",             // Template ID
-        formData,
-        "CkLM7KChXGE_7b40V"    // Public Key (Passed again for safety)
-      )
-      .then(
-        (response) => {
-          // Success!
-          alert(`SUCCESS! Status: ${response.status}, Text: ${response.text}`);
-          event.target.reset();
-        },
-        (error) => {
-          // ERROR CATCHER: This will tell us exactly what is wrong
-          console.error("EmailJS Error:", error);
-          alert(`ERROR FAILED: ${JSON.stringify(error)}`); 
-        }
-      )
-      .finally(() => setIsLoading(false));
+    emailjs.sendForm(
+      "service_d46tto5",       // ✅ Service ID is CORRECT
+      "PASTE_YOUR_TEMPLATE_ID_HERE", // ❌ DELETE THIS TEXT AND PASTE YOUR ID
+      form.current,
+      "CkLM7KChXGE_7b40V"      // ✅ Public Key is CORRECT
+    )
+    .then((result) => {
+        alert("Message sent successfully!");
+        e.target.reset();
+    }, (error) => {
+        alert("Error: " + error.text); 
+    })
+    .finally(() => setIsLoading(false));
   };
 
   return (
@@ -62,16 +42,19 @@ const Contact = () => {
           </motion.h2>
 
           <motion.form
+            ref={form}
+            onSubmit={sendEmail}
             variants={fadeIn("up", 0.4)}
             initial="hidden"
             animate="show"
             exit="hidden"
             className="flex-1 flex flex-col gap-6 w-full mx-auto"
-            onSubmit={handleSubmit}
             autoComplete="off"
             autoCapitalize="off"
-            name="contact"
           >
+            {/* HIDDEN INPUT for Subject Line */}
+            <input type="hidden" name="title" value="New Portfolio Inquiry" />
+
             <div className="flex gap-x-6 w-full">
               <input
                 type="text"
