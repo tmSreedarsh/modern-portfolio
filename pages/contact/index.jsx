@@ -8,13 +8,8 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Initialize EmailJS with your Public Key from env var
-    const key = process.env.NEXT_PUBLIC_EMAILJS_KEY;
-    if (key) {
-      emailjs.init(key);
-    } else {
-      console.warn("NEXT_PUBLIC_EMAILJS_KEY is not set. EmailJS not initialized.");
-    }
+    // I put your REAL Public Key here from your screenshot
+    emailjs.init("CkLM7KChXGE_7b40V"); 
   }, []);
 
   const handleSubmit = (event) => {
@@ -24,14 +19,16 @@ const Contact = () => {
     const formData = {
       name: event.target.name.value,
       email: event.target.email.value,
-      subject: event.target.subject.value,
+      // Your template uses {{title}} for the subject, so I mapped it here
+      title: event.target.subject.value, 
+      subject: event.target.subject.value, 
       message: event.target.message.value,
     };
 
     emailjs
       .send(
-        "service_d46tto5",
-        "template_ig8lr4v",
+        "service_d46tto5", // Your REAL Service ID
+        "q3aqyno",         // Your REAL Template ID
         formData
       )
       .then(
@@ -75,9 +72,6 @@ const Contact = () => {
             autoCapitalize="off"
             name="contact"
           >
-            {/* Hidden input for Netlify/Form detection */}
-            <input type="hidden" name="form-name" value="contact" />
-
             {/* input group */}
             <div className="flex gap-x-6 w-full">
               <input
@@ -100,7 +94,6 @@ const Contact = () => {
             <input
               type="text"
               name="subject"
-              // I kept this specific for your Research Profile
               placeholder="Subject (e.g., Research Inquiry)"
               className="input"
               disabled={isLoading}
