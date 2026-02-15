@@ -7,8 +7,8 @@ import {
   FaPython, 
   FaGitAlt, 
   FaGlobeAmericas,
-  FaChevronRight, // For Tab Scroll Hint
-  FaHandPointLeft // For Table Scroll Hint
+  FaChevronRight,
+  FaHandPointLeft
 } from "react-icons/fa";
 
 import { 
@@ -213,28 +213,36 @@ const About = () => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="h-full bg-primary/30 pt-[120px] pb-4 xl:py-32 text-center xl:text-left">
-      <Circles />
+    // FIX 1: Increased top padding to pt-[150px] to force content below the Header
+    // FIX 2: Added z-index relative positioning to the main container
+    <div className="h-full bg-primary/30 pt-[150px] pb-[140px] xl:py-32 text-center xl:text-left flex flex-col relative z-10">
+      
+      {/* Circles Background - Lower Z-Index */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Circles />
+      </div>
 
-      <div className="container mx-auto h-full max-w-6xl px-4 md:px-6 flex flex-col">
+      {/* Content Container - Higher Z-Index */}
+      <div className="container mx-auto h-full max-w-6xl px-4 md:px-6 flex flex-col min-h-0 relative z-20">
         
-        {/* 1. TOP: TABS (Fixed & Swipeable) */}
+        {/* 1. TOP: TABS */}
         <motion.div
           variants={fadeIn("down", 0.2)}
           initial="hidden"
           animate="show"
           exit="hidden"
-          className="w-full shrink-0 z-10 relative" 
+          // FIX 3: Increased Z-Index to z-40 so Tabs are always on top
+          className="w-full shrink-0 z-40 relative"
         >
-          {/* TABS CONTAINER */}
-          <div className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible no-scrollbar justify-start xl:justify-start gap-4 md:gap-x-6 md:gap-y-4 mb-4 w-full border-b border-white/10 pb-4 px-1 pr-8 md:pr-0">
+          {/* TABS LIST: Increased padding (py-2 px-3) for bigger click targets */}
+          <div className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible no-scrollbar justify-start xl:justify-start gap-4 md:gap-x-8 md:gap-y-4 mb-6 w-full border-b border-white/10 pb-4 px-1 pr-8 md:pr-0 min-h-[60px] items-center pointer-events-auto">
             {aboutData.map((item, itemI) => (
               <div
                 key={itemI}
                 className={`${
                   index === itemI &&
                   "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
-                } cursor-pointer text-sm md:text-base xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0`}
+                } cursor-pointer text-sm md:text-base xl:text-lg relative after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0 transition-all duration-300 py-2 px-2 select-none hover:text-white`}
                 onClick={() => setIndex(itemI)}
               >
                 {item.title}
@@ -242,61 +250,60 @@ const About = () => {
             ))}
           </div>
 
-          {/* VISUAL HINT FOR TABS (Mobile Only) */}
-          <div className="md:hidden absolute right-0 top-0 h-[80%] flex items-center justify-center bg-gradient-to-l from-primary/80 to-transparent pointer-events-none pr-1">
+          <div className="md:hidden absolute right-0 top-0 h-full flex items-center justify-center bg-gradient-to-l from-primary via-primary/80 to-transparent pointer-events-none pr-1">
              <FaChevronRight className="text-accent animate-pulse text-sm" />
           </div>
         </motion.div>
 
         {/* 2. MIDDLE: SCROLLABLE CONTENT */}
-        <div className="flex-1 overflow-y-auto no-scrollbar relative mb-4">
+        <div className="flex-1 overflow-y-auto no-scrollbar relative min-h-0 mb-4 z-10">
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="py-2 flex flex-col gap-y-6 items-center xl:items-start"
+            className="py-2 flex flex-col gap-y-4 md:gap-y-6 items-center xl:items-start"
           >
-            {/* TABLE LOGIC FOR EDUCATION */}
+            {/* TABLE LOGIC */}
             {aboutData[index].title === 'Education' ? (
                 <div className="w-full flex flex-col">
-                    <div className="w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative">
+                    <div className="w-full overflow-x-auto rounded-lg border border-white/10 bg-white/5 relative shadow-lg">
                         <table className="w-full text-left text-white/80 border-collapse min-w-[600px] md:min-w-[800px]">
                             <thead>
                                 <tr className="bg-white/10 text-accent text-[11px] md:text-sm uppercase tracking-wider">
-                                    <th className="py-2 px-3 md:py-3 md:px-4 font-bold border-b border-white/10">Degree</th>
-                                    <th className="py-2 px-3 md:py-3 md:px-4 font-bold border-b border-white/10">University</th>
-                                    <th className="py-2 px-3 md:py-3 md:px-4 font-bold border-b border-white/10">Specialization / Stream</th>
-                                    <th className="py-2 px-3 md:py-3 md:px-4 font-bold border-b border-white/10">Year</th>
+                                    <th className="py-3 px-3 md:px-4 font-bold border-b border-white/10">Degree</th>
+                                    <th className="py-3 px-3 md:px-4 font-bold border-b border-white/10">University</th>
+                                    <th className="py-3 px-3 md:px-4 font-bold border-b border-white/10">Specialization / Stream</th>
+                                    <th className="py-3 px-3 md:px-4 font-bold border-b border-white/10">Year</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {aboutData[index].info.map((row, i) => (
                                     <tr key={i} className="border-b border-white/5 hover:bg-white/5 transition-colors text-[11px] md:text-sm">
-                                        <td className="py-2 px-3 md:py-3 md:px-4 font-bold text-white whitespace-nowrap">{row.degree}</td>
-                                        <td className="py-2 px-3 md:py-3 md:px-4">{row.university}</td>
-                                        <td className="py-2 px-3 md:py-3 md:px-4 whitespace-pre-wrap leading-relaxed">{row.specialization}</td>
-                                        <td className="py-2 px-3 md:py-3 md:px-4 text-accent font-bold whitespace-nowrap">{row.year}</td>
+                                        <td className="py-3 px-3 md:px-4 font-bold text-white whitespace-nowrap">{row.degree}</td>
+                                        <td className="py-3 px-3 md:px-4">{row.university}</td>
+                                        <td className="py-3 px-3 md:px-4 whitespace-pre-wrap leading-relaxed">{row.specialization}</td>
+                                        <td className="py-3 px-3 md:px-4 text-accent font-bold whitespace-nowrap">{row.year}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                    {/* VISUAL HINT FOR TABLE (Mobile Only) */}
                     <div className="md:hidden mt-2 text-white/40 text-[10px] italic flex items-center justify-center gap-2 animate-pulse">
                         <FaHandPointLeft /> Swipe table left to see Year
                     </div>
                 </div>
             ) : (
-                // LIST LOGIC FOR OTHERS
+                // LIST LOGIC
                 aboutData[index].info.map((item, itemI) => (
                     <div
                         key={itemI}
-                        className="w-full flex flex-col md:flex-row md:items-start gap-x-4 text-center md:text-left text-white/70"
+                        className="w-full flex flex-col md:flex-row md:items-start gap-x-6 text-center md:text-left text-white/70"
                     >
-                        <div className="font-light mb-1 md:mb-0 text-white md:min-w-[200px] font-bold text-[14px] md:text-[15px]">
+                        <div className="font-light mb-1 md:mb-0 text-white md:min-w-[220px] font-bold text-[14px] md:text-[16px]">
                             {item.title}
                         </div>
+                        
                         <div className="flex flex-col items-center md:items-start w-full">
                             <div className="flex flex-col md:flex-row gap-x-2 items-center mb-1">
                                 <div className="hidden md:flex text-white/40">-</div>
@@ -304,8 +311,8 @@ const About = () => {
 
                                 <div className="flex flex-wrap gap-x-4 justify-center md:justify-start">
                                     {item.icons?.map((Icon, iconI) => (
-                                        <div key={iconI} className="text-2xl text-white hover:text-accent transition-all">
-                                        <Icon />
+                                        <div key={iconI} className="text-2xl text-white hover:text-accent transition-all duration-300">
+                                            <Icon />
                                         </div>
                                     ))}
                                     {!item.icons && <div className="hidden md:flex text-accent font-semibold text-sm">{item.stage}</div>}
@@ -313,7 +320,7 @@ const About = () => {
                             </div>
 
                             {item.description && (
-                                <ul className="text-xs md:text-sm text-white/60 italic list-none md:list-disc md:pl-5 space-y-2 mt-2 leading-relaxed text-center md:text-left">
+                                <ul className="text-xs md:text-sm text-white/60 italic list-none md:list-disc md:pl-5 space-y-2 mt-1 leading-relaxed text-center md:text-left">
                                     {item.description.map((desc, i) => (
                                         <li key={i}>{desc}</li>
                                     ))}
@@ -323,11 +330,14 @@ const About = () => {
                     </div>
                 ))
             )}
+            
+            <div className="h-[20px] md:h-0 w-full"></div>
+            
           </motion.div>
         </div>
 
         {/* 3. BOTTOM: FIXED COUNTERS */}
-        <div className="w-full shrink-0 border-t border-white/10 pt-4 pb-2 bg-primary/30 z-20">
+        <div className="w-full shrink-0 border-t border-white/10 pt-4 pb-2 md:pb-4 bg-primary/80 backdrop-blur-md z-30">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 
                 {/* 1. Experience */}
@@ -335,7 +345,7 @@ const About = () => {
                   <div className="text-xl md:text-3xl font-extrabold text-accent mb-1">
                     <CountUp start={0} end={3} duration={8} /> +
                   </div>
-                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90">
+                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90 font-medium">
                     Years Experience
                   </div>
                 </div>
@@ -345,7 +355,7 @@ const About = () => {
                   <div className="text-xl md:text-3xl font-extrabold text-accent mb-1">
                     <CountUp start={0} end={3} duration={5} />
                   </div>
-                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90">
+                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90 font-medium">
                     Academic Projects
                   </div>
                 </div>
@@ -355,7 +365,7 @@ const About = () => {
                   <div className="text-xl md:text-3xl font-extrabold text-accent mb-1">
                     <CountUp start={0} end={1} duration={5} /> +
                   </div>
-                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90">
+                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90 font-medium">
                     Paper Publications
                   </div>
                 </div>
@@ -365,7 +375,7 @@ const About = () => {
                   <div className="text-xl md:text-3xl font-extrabold text-accent mb-1">
                     <CountUp start={0} end={23} duration={5} /> +
                   </div>
-                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90">
+                  <div className="text-[10px] uppercase tracking-[1px] leading-[1.2] text-white/90 font-medium">
                     Total Credentials
                   </div>
                 </div>
