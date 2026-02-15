@@ -283,7 +283,7 @@ const About = () => {
         <Circles />
       </div>
 
-      <div className="container mx-auto max-w-full h-full flex flex-col px-4 sm:px-6 md:px-8 xl:px-0 relative z-20">
+      <div className="container mx-auto max-w-full h-full flex flex-col px-4 sm:px-6 md:px-8 xl:px-4 relative z-20">
         
         {/* 1. HEADER SPACER */}
         {/* Pushes everything down so it doesn't hide behind your name */}
@@ -291,7 +291,7 @@ const About = () => {
 
         {/* 2. MAIN CONTENT (Expands to fill space) */}
         {/* min-h-0 is CRITICAL: It allows the inner content to scroll while the parent stays fixed. */}
-        <div className="flex-1 flex flex-col min-h-0">
+        <div className="flex-1 flex flex-col min-h-0 w-full xl:max-w-[980px] xl:mx-auto">
             
             {/* TABS ROW */}
             <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
@@ -359,7 +359,7 @@ const About = () => {
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
             <div
                 ref={contentScrollRef}
-                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pr-1 sm:pr-2 pb-2 sm:pb-4 touch-pan-y"
+                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-2 sm:pb-4 touch-pan-y"
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
             >
@@ -444,7 +444,7 @@ const About = () => {
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
         <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(136px+env(safe-area-inset-bottom))] sm:pb-[calc(124px+env(safe-area-inset-bottom))] md:pb-8 xl:pb-10 z-50">
-            <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 items-start">
+            <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 items-start">
                 
                 <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
