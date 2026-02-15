@@ -8,7 +8,7 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // I put your REAL Public Key here from your screenshot
+    // YOUR REAL PUBLIC KEY (From your screenshot)
     emailjs.init("CkLM7KChXGE_7b40V"); 
   }, []);
 
@@ -19,7 +19,7 @@ const Contact = () => {
     const formData = {
       name: event.target.name.value,
       email: event.target.email.value,
-      // Your template uses {{title}} for the subject, so I mapped it here
+      // Your template uses {{title}} for the email subject line
       title: event.target.subject.value, 
       subject: event.target.subject.value, 
       message: event.target.message.value,
@@ -27,8 +27,8 @@ const Contact = () => {
 
     emailjs
       .send(
-        "service_d46tto5", // Your REAL Service ID
-        "q3aqyno",         // Your REAL Template ID
+        "service_d46tto5", // YOUR REAL SERVICE ID
+        "q3aqyno",         // YOUR REAL TEMPLATE ID
         formData
       )
       .then(
