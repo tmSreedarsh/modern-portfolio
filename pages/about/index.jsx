@@ -211,6 +211,7 @@ const About = () => {
   const [index, setIndex] = useState(0);
   const touchStart = useRef({ x: 0, y: 0, ignoreSwipe: false });
   const tabRefs = useRef([]);
+  const contentScrollRef = useRef(null);
 
   const goNextSection = () => {
     setIndex((prev) => Math.min(prev + 1, aboutData.length - 1));
@@ -259,6 +260,11 @@ const About = () => {
         inline: "center",
         block: "nearest",
       });
+    }
+
+    // Keep every section consistent: start at top when switching tabs.
+    if (contentScrollRef.current) {
+      contentScrollRef.current.scrollTo({ top: 0, behavior: "auto" });
     }
   }, [index]);
 
@@ -314,7 +320,8 @@ const About = () => {
             {/* SCROLLABLE LIST AREA */}
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
             <div
-                className="flex-1 overflow-y-auto no-scrollbar pr-1 sm:pr-2 pb-2 sm:pb-4 touch-pan-y"
+                ref={contentScrollRef}
+                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pr-1 sm:pr-2 pb-2 sm:pb-4 touch-pan-y"
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
             >
@@ -323,7 +330,7 @@ const About = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col gap-y-4 items-center xl:items-start"
+                    className="flex w-full flex-col gap-y-4 items-center xl:items-start"
                 >
                     {/* TABLE LOGIC */}
                     {aboutData[index].title === 'Education' ? (
@@ -359,16 +366,16 @@ const About = () => {
                         aboutData[index].info.map((item, itemI) => (
                             <div
                                 key={itemI}
-                                className="w-full flex flex-col lg:flex-row lg:items-start gap-y-2 lg:gap-x-6 text-center lg:text-left text-white/70"
+                                className="w-full min-w-0 flex flex-col lg:flex-row lg:items-start gap-y-2 lg:gap-x-6 text-center lg:text-left text-white/70"
                             >
                                 <div className="font-light mb-1 lg:mb-0 text-white lg:min-w-[180px] font-bold text-[13px] sm:text-[14px] md:text-[15px]">
                                     {item.title}
                                 </div>
                                 
-                                <div className="flex flex-col items-center lg:items-start w-full">
+                                <div className="flex flex-col items-stretch lg:items-start w-full min-w-0">
                                     <div className="flex flex-col lg:flex-row gap-x-2 items-center mb-1">
                                         <div className="hidden lg:flex text-white/40">-</div>
-                                        <div className="lg:hidden mb-1 text-accent font-semibold text-xs">{item.stage}</div>
+                                        <div className="lg:hidden mb-1 text-accent font-semibold text-xs w-full break-words">{item.stage}</div>
 
                                         <div className="flex flex-wrap gap-x-4 justify-center lg:justify-start">
                                             {item.icons?.map((Icon, iconI) => (
@@ -381,7 +388,7 @@ const About = () => {
                                     </div>
 
                                     {item.description && (
-                                        <ul className="text-[11px] sm:text-xs md:text-sm text-white/60 italic list-none lg:list-disc lg:pl-5 space-y-2 mt-1 leading-relaxed text-center lg:text-left">
+                                        <ul className="w-full max-w-full px-2 sm:px-0 text-[11px] sm:text-xs md:text-sm text-white/60 italic list-none lg:list-disc lg:pl-5 space-y-2 mt-1 leading-relaxed text-center lg:text-left break-words">
                                             {item.description.map((desc, i) => (
                                                 <li key={i}>{desc}</li>
                                             ))}
