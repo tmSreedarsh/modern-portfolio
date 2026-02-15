@@ -1,47 +1,34 @@
 import { motion } from "framer-motion";
 import { BsArrowRight } from "react-icons/bs";
 import { fadeIn } from "../../variants";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const form = useRef();
 
-  // REMOVED useEffect. We don't need it anymore.
-  // We will pass the key directly in the send function below.
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
     setIsLoading(true);
 
-    const formData = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      title: event.target.subject.value, // Matches {{title}} in your subject line
-      subject: event.target.subject.value, // Matches {{subject}} in your body
-      message: event.target.message.value,
-    };
-
-    // The 4th argument here ("CkLM7KChXGE_7b40V") forces the key to work
-    emailjs
-      .send(
-        "service_d46tto5",       // Service ID
-        "q3aqyno",               // Template ID
-        formData,
-        "CkLM7KChXGE_7b40V"      // Public Key (Directly here is SAFER)
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Message sent successfully!");
-          event.target.reset();
-        },
-        (error) => {
-          console.log("FAILED...", error);
-          alert("Failed to send message. Check console for details.");
-        }
-      )
-      .finally(() => setIsLoading(false));
+    // This sends the HTML form directly (Most reliable method)
+    emailjs.sendForm(
+      "service_d46tto5",       // YOUR Service ID
+      "q3aqyno",               // YOUR Template ID
+      form.current,
+      "CkLM7KChXGE_7b40V"      // YOUR Public Key
+    )
+    .then((result) => {
+        console.log(result.text);
+        alert("SUCCESS! Message sent.");
+        e.target.reset();
+    }, (error) => {
+        console.log(error.text);
+        // THIS IS THE IMPORTANT PART: It will show you the exact error
+        alert("ERROR: " + error.text); 
+    })
+    .finally(() => setIsLoading(false));
   };
 
   return (
@@ -59,16 +46,20 @@ const Contact = () => {
           </motion.h2>
 
           <motion.form
+            ref={form}
+            onSubmit={sendEmail}
             variants={fadeIn("up", 0.4)}
             initial="hidden"
             animate="show"
             exit="hidden"
             className="flex-1 flex flex-col gap-6 w-full mx-auto"
-            onSubmit={handleSubmit}
             autoComplete="off"
             autoCapitalize="off"
-            name="contact"
           >
+            {/* HIDDEN INPUT: Maps 'subject' to 'title' for your specific template */}
+            {/* This fixes the "Subject" line in your email */}
+            <input type="hidden" name="title" value="New Portfolio Inquiry" />
+
             <div className="flex gap-x-6 w-full">
               <input
                 type="text"
