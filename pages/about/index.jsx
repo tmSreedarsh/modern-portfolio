@@ -398,43 +398,43 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(84px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
-            <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="shrink-0 w-full border-t border-white/10 pt-3 md:pt-4 pb-[calc(112px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 items-start">
                 
-                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center">
-                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
+                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={8} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
                         <span className="md:hidden">Years</span>
                         <span className="hidden md:inline">Years Exp.</span>
                     </div>
                 </div>
 
-                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center">
-                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={5} />
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
                         Projects
                     </div>
                 </div>
 
-                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center">
-                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
+                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={1} duration={5} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
                         <span className="md:hidden">Pubs</span>
                         <span className="hidden md:inline">Publications</span>
                     </div>
                 </div>
 
-                <div className="pl-1 sm:pl-2 md:pl-4 text-center">
-                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1">
+                <div className="pl-1 sm:pl-2 md:pl-4 text-center min-h-[62px] sm:min-h-[68px] md:min-h-0 flex flex-col items-center justify-start">
+                    <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={23} duration={5} /> +
                     </div>
-                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium">
+                    <div className="text-[8px] sm:text-[9px] md:text-xs uppercase tracking-[1px] text-white/90 font-medium leading-tight">
                         <span className="md:hidden">Certs</span>
                         <span className="hidden md:inline">Credentials</span>
                     </div>
