@@ -211,13 +211,22 @@ const About = () => {
   const [index, setIndex] = useState(0);
   const touchStart = useRef({ x: 0, y: 0, ignoreSwipe: false });
   const contentScrollRef = useRef(null);
+  const maxSectionIndex = aboutData.length - 1;
+
+  const setSectionByIndex = (nextIndex) => {
+    setIndex((prev) => {
+      const resolvedIndex =
+        typeof nextIndex === "function" ? nextIndex(prev) : nextIndex;
+      return Math.max(0, Math.min(resolvedIndex, maxSectionIndex));
+    });
+  };
 
   const goNextSection = () => {
-    setIndex((prev) => Math.min(prev + 1, aboutData.length - 1));
+    setSectionByIndex((prev) => prev + 1);
   };
 
   const goPrevSection = () => {
-    setIndex((prev) => Math.max(prev - 1, 0));
+    setSectionByIndex((prev) => prev - 1);
   };
 
   const handleTouchStart = (e) => {
@@ -240,7 +249,7 @@ const About = () => {
     const deltaY = touch.clientY - touchStart.current.y;
 
     // Switch sections only for deliberate horizontal swipes on content.
-    if (Math.abs(deltaX) < 80 || Math.abs(deltaX) < Math.abs(deltaY) * 1.5) {
+    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) {
       return;
     }
 
@@ -291,7 +300,7 @@ const About = () => {
                             index === itemI &&
                             "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
                           } cursor-pointer text-xs relative after:w-5 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 whitespace-nowrap flex-none transition-all duration-300 py-1 hover:text-white font-medium`}
-                          onClick={() => setIndex(itemI)}
+                          onClick={() => setSectionByIndex(itemI)}
                         >
                           {item.title}
                         </button>
@@ -308,21 +317,25 @@ const About = () => {
                           index === itemI &&
                           "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
                         } cursor-pointer text-sm xl:text-base relative after:w-6 sm:after:w-8 after:h-[2px] after:bg-white after:absolute after:-bottom-1 after:left-0 whitespace-nowrap flex-shrink-0 transition-all duration-300 py-1 px-1 hover:text-white font-medium`}
-                        onClick={() => setIndex(itemI)}
+                        onClick={() => setSectionByIndex(itemI)}
                       >
                         {item.title}
                       </button>
                     ))}
                 </div>
 
-                <div data-swipe-ignore="true" className="md:hidden mt-2 flex items-center justify-center">
+                <div
+                  className="md:hidden mt-2 flex items-center justify-center"
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
+                >
                     <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2 py-1">
                         {aboutData.map((item, itemI) => (
                           <button
                             type="button"
                             key={`${item.title}-dot`}
                             className="relative h-2 w-2"
-                            onClick={() => setIndex(itemI)}
+                            onClick={() => setSectionByIndex(itemI)}
                             aria-label={`Go to ${item.title}`}
                           >
                             {index === itemI ? (
