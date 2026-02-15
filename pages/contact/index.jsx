@@ -18,8 +18,8 @@ const Contact = () => {
     setIsLoading(true);
 
     emailjs.sendForm(
-      "service_d46tto5",       // 2. YOUR SERVICE ID (Verified from image_f2cc89.jpg)
-      "template_ig8lr4v",      // 3. YOUR REAL TEMPLATE ID (Verified from image_f3b960.jpg)
+      "service_d46tto5",       // 2. YOUR SERVICE ID (Verified)
+      "template_ig8ir4v",      // 3. YOUR REAL TEMPLATE ID (Verified from image_f3b960.jpg)
       form.current,
       "CkLM7KChXGE_7b40V"      // 4. Public Key (Safety backup)
     )
