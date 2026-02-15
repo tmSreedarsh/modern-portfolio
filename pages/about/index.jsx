@@ -239,8 +239,8 @@ const About = () => {
     const deltaX = touch.clientX - touchStart.current.x;
     const deltaY = touch.clientY - touchStart.current.y;
 
-    // Switch sections only for intentional horizontal swipes.
-    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) {
+    // Switch sections only for deliberate horizontal swipes on content.
+    if (Math.abs(deltaX) < 80 || Math.abs(deltaX) < Math.abs(deltaY) * 1.5) {
       return;
     }
 
@@ -281,14 +281,10 @@ const About = () => {
 
         {/* 2. MAIN CONTENT (Expands to fill space) */}
         {/* min-h-0 is CRITICAL: It allows the inner content to scroll while the parent stays fixed. */}
-        <div
-          className="flex-1 flex flex-col min-h-0 touch-pan-y"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
+        <div className="flex-1 flex flex-col min-h-0">
             
             {/* TABS ROW */}
-            <div className="shrink-0 mb-3 xl:mb-6">
+            <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
                 <div className="relative">
                 <div className="flex flex-nowrap md:flex-wrap xl:flex-nowrap overflow-x-auto md:overflow-visible no-scrollbar snap-x snap-mandatory justify-start gap-2 sm:gap-3 md:gap-x-4 md:gap-y-2 xl:gap-x-6 border-b border-white/10 pb-2 pr-6 md:pr-0 items-center">
                     {aboutData.map((item, itemI) => (
@@ -317,7 +313,11 @@ const About = () => {
 
             {/* SCROLLABLE LIST AREA */}
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
-            <div className="flex-1 overflow-y-auto no-scrollbar pr-1 sm:pr-2 pb-2 sm:pb-4">
+            <div
+                className="flex-1 overflow-y-auto no-scrollbar pr-1 sm:pr-2 pb-2 sm:pb-4 touch-pan-y"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+            >
                 <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 10 }}
