@@ -489,7 +489,7 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="shrink-0 w-full border-t border-white/10 pt-2 md:pt-3 pb-[calc(104px+env(safe-area-inset-bottom))] sm:pb-[calc(100px+env(safe-area-inset-bottom))] md:pb-[calc(96px+env(safe-area-inset-bottom))] lg:pb-[calc(94px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
+        <div className="shrink-0 w-full border-t border-white/10 pt-2 md:pt-3 pb-[calc(122px+env(safe-area-inset-bottom))] sm:pb-[calc(118px+env(safe-area-inset-bottom))] md:pb-[calc(116px+env(safe-area-inset-bottom))] lg:pb-[calc(114px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
             <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 items-start">
                 
                 <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
