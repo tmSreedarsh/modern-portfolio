@@ -211,7 +211,23 @@ const About = () => {
   const [index, setIndex] = useState(0);
   const touchStart = useRef({ x: 0, y: 0, ignoreSwipe: false });
   const contentScrollRef = useRef(null);
+  const mobileTabsScrollRef = useRef(null);
+  const mobileTabRefs = useRef([]);
   const maxSectionIndex = aboutData.length - 1;
+
+  const scrollActiveMobileTabIntoView = (targetIndex, behavior = "smooth") => {
+    const tabsScroller = mobileTabsScrollRef.current;
+    const activeTab = mobileTabRefs.current[targetIndex];
+
+    if (!tabsScroller || !activeTab) return;
+    if (tabsScroller.scrollWidth <= tabsScroller.clientWidth) return;
+
+    activeTab.scrollIntoView({
+      behavior,
+      inline: "center",
+      block: "nearest",
+    });
+  };
 
   const setSectionByIndex = (nextIndex) => {
     setIndex((prev) => {
@@ -265,6 +281,12 @@ const About = () => {
     if (contentScrollRef.current) {
       contentScrollRef.current.scrollTo({ top: 0, behavior: "auto" });
     }
+
+    const rafId = window.requestAnimationFrame(() => {
+      scrollActiveMobileTabIntoView(index, "smooth");
+    });
+
+    return () => window.cancelAnimationFrame(rafId);
   }, [index]);
 
   return (
@@ -291,11 +313,17 @@ const About = () => {
             {/* TABS ROW */}
             <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
                 <div className="md:hidden relative overflow-hidden">
-                    <div className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-0">
+                    <div
+                      ref={mobileTabsScrollRef}
+                      className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-0"
+                    >
                       {aboutData.map((item, itemI) => (
                         <button
                           type="button"
                           key={itemI}
+                          ref={(el) => {
+                            mobileTabRefs.current[itemI] = el;
+                          }}
                           className={`${
                             index === itemI &&
                             "text-accent after:w-[100%] after:bg-accent after:transition-all after:duration-300"
