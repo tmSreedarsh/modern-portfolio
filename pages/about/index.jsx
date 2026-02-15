@@ -6,7 +6,8 @@ import CountUp from "react-countup";
 import { 
   FaPython, 
   FaGitAlt, 
-  FaGlobeAmericas
+  FaGlobeAmericas,
+  FaBullseye
 } from "react-icons/fa";
 
 import { 
@@ -97,7 +98,7 @@ export const aboutData = [
   {
     title: "Research Focus",
     info: [
-      { title: "My Vision", stage: "Aspiring to be a Versatile Researcher" },
+      { title: "My Vision", stage: "Aspiring to be a Versatile Researcher", logo: FaBullseye },
       { title: "Key Interests", stage: "Disaster Management, Spatial Analysis & Geo-AI" },
     ],
   },
@@ -416,7 +417,7 @@ const About = () => {
                                             <span className="whitespace-pre-line leading-snug text-white/80">{row.specialization}</span>
 
                                             <span className="uppercase tracking-wide text-white/50">Year</span>
-                                            <span className="font-bold text-accent leading-tight">{row.year}</span>
+                                            <span className="font-bold text-white leading-tight">{row.year}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -438,7 +439,7 @@ const About = () => {
                                                 <td className="py-2.5 px-2 sm:px-3 md:px-4 font-bold text-white whitespace-nowrap">{row.degree}</td>
                                                 <td className="py-2.5 px-2 sm:px-3 md:px-4">{row.university}</td>
                                                 <td className="py-2.5 px-2 sm:px-3 md:px-4 whitespace-pre-wrap leading-relaxed">{row.specialization}</td>
-                                                <td className="py-2.5 px-2 sm:px-3 md:px-4 text-accent font-bold whitespace-nowrap">{row.year}</td>
+                                                <td className="py-2.5 px-2 sm:px-3 md:px-4 text-white font-bold whitespace-nowrap">{row.year}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -453,7 +454,10 @@ const About = () => {
                                 className="w-full min-w-0 flex flex-col lg:flex-row lg:items-start gap-y-2 lg:gap-x-6 text-center lg:text-left text-white/70"
                             >
                                 <div className="font-light mb-1 lg:mb-0 text-white lg:min-w-[180px] font-bold text-[13px] sm:text-[14px] md:text-[15px]">
-                                    {item.title}
+                                    <div className="inline-flex items-center justify-center lg:justify-start gap-2">
+                                      {item.logo && <item.logo className="text-accent text-[12px] sm:text-[13px]" />}
+                                      <span>{item.title}</span>
+                                    </div>
                                 </div>
                                 
                                 <div className="flex flex-col items-stretch lg:items-start w-full min-w-0">
