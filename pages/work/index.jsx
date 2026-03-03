@@ -61,7 +61,7 @@ const Work = () => {
               className="mb-6"
             >
                <Link 
-                 href="/research-summary.pdf" 
+                 href="/Sreedarsh_TM_Research-Summary.pdf" 
                  target="_blank" 
                  className="flex items-center gap-x-2 text-white hover:text-accent transition-all group cursor-pointer justify-center lg:justify-start"
                >
