@@ -8,7 +8,7 @@ import {
   RiMailLine,
 } from "react-icons/ri";
 
-import { SiOrcid } from "react-icons/si";
+import { SiOrcid, SiGooglescholar } from "react-icons/si";
 
 export const socialData = [
   {
@@ -28,6 +28,12 @@ export const socialData = [
     link: "https://orcid.org/0009-0009-0266-5122",
     Icon: SiOrcid,
     color: "hover:text-[#A6CE39]",
+  },
+  {
+    name: "Google Scholar",
+    link: "https://scholar.google.com/citations?user=5QaL5pkAAAAJ",
+    Icon: SiGooglescholar,
+    color: "hover:text-[#4285F4]",
   },
   {
     name: "Twitter",
