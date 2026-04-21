@@ -44,7 +44,7 @@ const Header = () => {
             {/* Download CV Button (Made Smaller/Compact for Mobile) */}
             <Link 
               href="/Sreedarsh_TM_CV.pdf" 
-              target="_blank" 
+              download="Sreedarsh_TM_CV.pdf"
               className="text-[10px] md:text-xs font-bold tracking-wider text-accent hover:text-white transition-all duration-300 border border-accent hover:bg-accent hover:text-primary px-3 py-1.5 rounded-full"
             >
               Download CV
@@ -58,3 +58,4 @@ const Header = () => {
 };
 
 export default Header;
+

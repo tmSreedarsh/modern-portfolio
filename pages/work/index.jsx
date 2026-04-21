@@ -62,7 +62,7 @@ const Work = () => {
             >
                <Link 
                  href="/Sreedarsh_TM_Research-Summary.pdf" 
-                 target="_blank" 
+                 download="Sreedarsh_TM_Research-Summary.pdf"
                  className="flex items-center gap-x-2 text-white hover:text-accent transition-all group cursor-pointer justify-center lg:justify-start"
                >
                  <span className="text-xl text-accent animate-bounce">
@@ -155,3 +155,4 @@ const Work = () => {
 };
 
 export default Work;
+
