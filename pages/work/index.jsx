@@ -60,7 +60,7 @@ const Work = () => {
               exit="hidden"
               className="mb-6"
             >
-               <Link 
+               <a 
                  href="/Sreedarsh_TM_Research-Summary.pdf" 
                  download="Sreedarsh_TM_Research-Summary.pdf"
                  className="flex items-center gap-x-2 text-white hover:text-accent transition-all group cursor-pointer justify-center lg:justify-start"
@@ -71,7 +71,7 @@ const Work = () => {
                  <span className="border-b border-white/40 group-hover:border-accent text-xs tracking-widest uppercase font-bold">
                    Download Research Summary
                  </span>
-               </Link>
+               </a>
             </motion.div>
 
             {/* PUBLISHED BOOK CHAPTER */}
