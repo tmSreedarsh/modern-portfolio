@@ -47,12 +47,23 @@ export const aboutData = [
     title: "Experience",
     info: [
       {
-        title: "Independent Researcher",
-        stage: "June 2025 - Present",
+        title: "Geospatial Analyst | SatSure",
+        stage: "July 2026 - Present",
         description: [
-            "Preparing for UGC NET & exploring AI integration in GIS.",
-            "Working on a research paper regarding Coastal Vulnerability.",
-            "Enhancing technical proficiency in Python & Deep Learning."
+          "Processing satellite imagery (multispectral, SAR) into actionable insights.",
+          "Building models for crop monitoring, yield forecasting, and climate risk.",
+          "Identifying and classifying features like crop types and land use.",
+          "Creating high-quality reports, maps, and visual outputs for clients.",
+          "Ensuring projects are delivered accurately and on time."
+        ]
+      },
+      {
+        title: "Junior Executive (GIS) | Directorate of Census Operations",
+        stage: "May 2026 - June 2026",
+        description: [
+          "Contributing to the 16th Indian Census (Digital Census 2027).",
+          "Collaborating with the MAP Division to maintain data integrity and spatial accuracy.",
+          "Supporting multi-thematic census datasets for reliable geographic analysis."
         ]
       },
       {
@@ -451,27 +462,26 @@ const About = () => {
                         aboutData[index].info.map((item, itemI) => (
                             <div
                                 key={itemI}
-                                className="w-full min-w-0 flex flex-col lg:flex-row lg:items-start gap-y-2 lg:gap-x-6 text-center lg:text-left text-white/70"
+                                className="w-full min-w-0 flex flex-col gap-y-2 text-center lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start lg:gap-x-6 lg:text-left text-white/70"
                             >
-                                <div className="font-light mb-1 lg:mb-0 text-white lg:min-w-[180px] font-bold text-[13px] sm:text-[14px] md:text-[15px]">
+                                <div className="font-light mb-1 lg:mb-0 text-white font-bold text-[13px] sm:text-[14px] md:text-[15px] lg:min-w-[240px] lg:max-w-[240px]">
                                     <div className="inline-flex items-center justify-center lg:justify-start gap-2">
                                       {item.logo && <item.logo className="text-accent text-[12px] sm:text-[13px]" />}
-                                      <span>{item.title}</span>
+                                      <span className="text-white">{item.title}</span>
                                     </div>
                                 </div>
-                                
-                                <div className="flex flex-col items-stretch lg:items-start w-full min-w-0">
-                                    <div className="flex flex-col lg:flex-row gap-x-2 items-center mb-1">
-                                        <div className="hidden lg:flex text-white/40">-</div>
-                                        <div className="lg:hidden mb-1 text-accent font-semibold text-xs w-full break-words">{item.stage}</div>
 
+                                <div className="flex flex-col items-stretch lg:items-start w-full min-w-0">
+                                    <div className="flex flex-col gap-y-2 sm:flex-row sm:items-center sm:justify-center lg:justify-between mb-2 text-center lg:text-left">
+                                        <div className="text-accent font-semibold text-xs sm:text-sm break-words">
+                                            {item.stage}
+                                        </div>
                                         <div className="flex flex-wrap gap-x-4 justify-center lg:justify-start">
                                             {item.icons?.map((Icon, iconI) => (
                                                 <div key={iconI} className="text-2xl text-white hover:text-accent transition-all duration-300">
                                                     <Icon />
                                                 </div>
                                             ))}
-                                            {!item.icons && <div className="hidden lg:flex text-accent font-semibold text-sm">{item.stage}</div>}
                                         </div>
                                     </div>
 
