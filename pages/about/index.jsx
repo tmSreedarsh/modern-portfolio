@@ -400,7 +400,7 @@ const About = () => {
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
             <div
                 ref={contentScrollRef}
-                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-2 sm:pb-4 touch-pan-y"
+              className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-[130px] md:pb-4 touch-pan-y"
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
             >
@@ -503,7 +503,7 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="shrink-0 w-full border-t border-white/10 pt-2 md:pt-3 pb-[calc(140px+env(safe-area-inset-bottom))] sm:pb-[calc(134px+env(safe-area-inset-bottom))] md:pb-[calc(118px+env(safe-area-inset-bottom))] lg:pb-[calc(114px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
+        <div className="fixed inset-x-0 bottom-[calc(80px+env(safe-area-inset-bottom))] z-40 w-full border-t border-white/10 bg-primary/70 px-4 pt-2 pb-2 backdrop-blur-sm md:static md:inset-auto md:z-50 md:bg-transparent md:px-0 md:pt-3 md:pb-3 md:backdrop-blur-none xl:pb-10">
             <div className="w-full max-w-[980px] mx-auto grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-1 sm:gap-2 md:gap-3 items-start">
                 
               <div className="pr-1 sm:pr-2 md:pr-4 border-r border-b border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start pb-2 sm:pb-0 sm:border-b-0">
