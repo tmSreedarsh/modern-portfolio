@@ -56,18 +56,6 @@ const Home = () => {
             opportunities.
           </motion.p>
 
-          <div className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-5">
-            <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.18em] text-accent mb-2">
-              Research Focus
-            </p>
-            <ul className="grid grid-cols-2 gap-x-3 gap-y-1 text-left text-[11px] md:text-sm text-white/80">
-              <li><span className="inline-block w-1.5 h-1.5 rounded-full bg-accent mr-2 align-middle" />Crop classification</li>
-              <li><span className="inline-block w-1.5 h-1.5 rounded-full bg-accent mr-2 align-middle" />Forest fire mapping</li>
-              <li><span className="inline-block w-1.5 h-1.5 rounded-full bg-accent mr-2 align-middle" />Landslide and flood risk</li>
-              <li><span className="inline-block w-1.5 h-1.5 rounded-full bg-accent mr-2 align-middle" />Coastal vulnerability</li>
-            </ul>
-          </div>
-
           {/* btn */}
           <div className="flex justify-center lg:hidden relative">
             <ProjectsBtn />

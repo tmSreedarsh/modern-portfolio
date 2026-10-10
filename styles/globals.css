@@ -5,6 +5,12 @@
 .translate-z-0 {
   transform: translateZ(0px);
 }
+
+.work-page {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
 .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet {
@@ -111,8 +117,9 @@
   }
 }
 
-/* Keep the Work page's project list and slider side by side in a restored window. */
-@media (min-width: 1000px) and (max-width: 1399.98px) and (max-height: 760px) and (max-aspect-ratio: 17/10) {
+/* Use two columns at medium desktop widths and in compact, non-widescreen windows. */
+@media (min-width: 960px) and (max-width: 1199.98px),
+  (min-width: 1200px) and (max-width: 1599.98px) and (max-aspect-ratio: 17/10) {
   .work-page {
     padding-top: 7.5rem;
     padding-bottom: 5rem;
