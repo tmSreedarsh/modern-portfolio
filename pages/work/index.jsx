@@ -16,7 +16,7 @@ const Work = () => {
     // 2. pt-[160px]: (MOBILE FIX) Forces content to start 160px down. It CANNOT go higher.
     // 3. xl:pt-36: (DESKTOP) Standard padding.
     // 4. xl:justify-center: Centers content ONLY on Desktop. Mobile uses top padding.
-    <div className='h-full bg-primary/30 flex flex-col items-center pt-[149px] xl:pt-36 pb-20 xl:pb-0 xl:justify-center'>
+    <div className='work-page h-full bg-primary/30 flex flex-col items-center pt-[149px] xl:pt-36 pb-20 xl:pb-0 xl:justify-center'>
       <Circles />
       
       {/* SCROLL CONTAINER
@@ -24,12 +24,12 @@ const Work = () => {
          - overflow-y-auto: Enables scrolling inside this area.
          - no-scrollbar: Hides the bar for a clean look.
       */}
-      <div className='container mx-auto z-10 h-full overflow-y-auto xl:overflow-visible no-scrollbar'>
+      <div className='work-page__container container mx-auto z-10 h-full overflow-y-auto xl:overflow-visible no-scrollbar'>
         
-        <div className='flex flex-col xl:flex-row gap-x-8 items-start xl:items-center'>
+        <div className='work-page__layout flex flex-col xl:flex-row gap-x-8 items-start xl:items-center'>
           
           {/* TEXT SECTION (Left Side) */}
-          <div className='text-center flex xl:w-[30vw] flex-col lg:text-left mb-8 xl:mb-0 justify-center z-10 w-full'>
+          <div className='work-page__details text-center flex xl:w-[30vw] flex-col lg:text-left mb-8 xl:mb-0 justify-center z-10 w-full'>
             <motion.h2 
               variants={fadeIn('up', 0.2)} 
               initial="hidden" 
@@ -158,7 +158,7 @@ const Work = () => {
             initial="hidden" 
             animate="show" 
             exit="hidden" 
-            className='w-full max-w-[360px] md:max-w-md xl:max-w-[65%] mx-auto xl:mx-0 mb-20 xl:mb-0'
+            className='work-page__slider w-full max-w-[360px] md:max-w-md xl:max-w-[65%] mx-auto xl:mx-0 mb-20 xl:mb-0'
           >
             <WorkSlider />
           </motion.div>

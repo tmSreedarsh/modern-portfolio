@@ -110,3 +110,35 @@
     max-height: 5.8rem;
   }
 }
+
+/* Keep the Work page's project list and slider side by side in a restored window. */
+@media (min-width: 1000px) and (max-width: 1399.98px) and (max-height: 760px) and (max-aspect-ratio: 17/10) {
+  .work-page {
+    padding-top: 7.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .work-page__container {
+    overflow-y: auto;
+  }
+
+  .work-page__layout {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .work-page__details {
+    flex: 0 0 42%;
+    width: 42%;
+    margin-bottom: 0;
+  }
+
+  .work-page__slider {
+    flex: 1 1 0%;
+    width: 54%;
+    max-width: none;
+    margin: 0;
+    min-width: 0;
+  }
+}
