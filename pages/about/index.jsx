@@ -404,7 +404,7 @@ const About = () => {
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
             <div
                 ref={contentScrollRef}
-                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-[72px] md:pb-[150px] xl:pb-24 touch-pan-y"
+                className="about-content-scroll min-h-0 flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 touch-pan-y"
             >
                 <motion.div
                     key={index}
