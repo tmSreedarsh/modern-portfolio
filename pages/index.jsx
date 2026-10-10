@@ -8,10 +8,10 @@ import { fadeIn } from "../variants";
 
 const Home = () => {
   return (
-    <div className="bg-primary/60 w-full min-h-screen lg:h-screen relative overflow-hidden">
+    <div className="home-hero bg-primary/60 w-full min-h-screen lg:h-screen relative overflow-hidden">
       {/* text */}
-      <div className="w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10 relative z-10">
-        <div className="text-center flex flex-col justify-center xl:text-left h-full w-full px-4 md:px-8 pt-40 pb-20 lg:pb-0">
+      <div className="home-hero__copy w-full h-full bg-gradient-to-r from-primary/10 via-black/30 to-black/10 relative z-10">
+        <div className="home-hero__content text-center flex flex-col justify-center xl:text-left h-full w-full px-4 md:px-8 pt-40 pb-20 lg:pb-0">
           
           {/* TITLE */}
           <motion.h1
@@ -19,7 +19,7 @@ const Home = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="h1 mb-4 font-bold"
+            className="home-hero__title h1 mb-4 font-bold"
           >
             <span className="block whitespace-nowrap text-[14px] sm:text-lg md:text-xl lg:text-3xl">
               Geospatial Intelligence{" "}
@@ -40,9 +40,9 @@ const Home = () => {
             className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-8 md:mb-10 lg:mb-16 text-xs opacity-80"
           >
             I am a geospatial postgraduate with four years of practical experience in GIS and remote sensing. I
-            completed a six-month internship at NRSC, ISRO, and have worked on academic projects. I currently work as
-            a Geospatial Analyst at SatSure. I use AI platforms for vibe coding to prototype tools and automate
-            repetitive tasks, giving me more time to explore data and grow as a <span className="font-semibold text-accent">versatile researcher</span>.
+            completed a six-month internship at ISRO's National Remote Sensing Centre (NRSC) and have worked on
+            academic projects. I currently work as a Geospatial Analyst at SatSure. I use AI-assisted coding to
+            prototype tools and automate repetitive tasks, leaving me more time to explore data and grow as a <span className="font-semibold text-accent">versatile researcher</span>.
           </motion.p>
 
           <motion.p
@@ -52,7 +52,8 @@ const Home = () => {
             exit="hidden"
             className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-3 text-xs md:text-sm text-white/75"
           >
-            Open to Image Analyst, Geospatial Analyst, Geomatics Engineer, and Research roles.
+            I am open to roles as an Image Analyst, Geospatial Analyst, or Geomatics Engineer, as well as research
+            opportunities.
           </motion.p>
 
           <div className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-5">
@@ -97,7 +98,7 @@ const Home = () => {
           animate="show"
           exit="hidden"
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="w-[737px] h-[678px] absolute bottom-0 right-[8%] pointer-events-none"
+          className="home-hero__portrait w-[737px] h-[678px] absolute bottom-0 right-[8%] pointer-events-none"
         >
           <Avatar />
         </motion.div>

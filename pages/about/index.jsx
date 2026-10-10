@@ -308,7 +308,9 @@ const About = () => {
     // MASTER LAYOUT: 
     // h-full: Fills the layout viewport while keeping internal section scrolling.
     // flex flex-col: Stacks elements vertically.
-    <div className="h-full h-[100dvh] bg-primary/30 text-center xl:text-left relative z-10 flex flex-col overflow-hidden overflow-x-hidden">
+    <>
+    <div aria-hidden="true" className="fixed inset-0 z-0 bg-primary/30 pointer-events-none" />
+    <div className="h-full h-[100dvh] bg-transparent text-center xl:text-left relative z-10 flex flex-col overflow-hidden overflow-x-hidden">
       
       {/* Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -548,6 +550,7 @@ const About = () => {
 
       </div>
     </div>
+    </>
   );
 };
 
