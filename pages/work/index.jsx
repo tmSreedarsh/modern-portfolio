@@ -5,6 +5,7 @@ import WorkSlider from '../../components/WorkSlider';
 import Bulb from '../../components/Bulb';
 import Circles from '../../components/Circles';
 import Link from 'next/link';
+import { FaGithub } from 'react-icons/fa';
 // Icons
 import { BsFileEarmarkPdf, BsArrowRight, BsBook, BsPen } from 'react-icons/bs';
 
@@ -51,6 +52,20 @@ const Work = () => {
               <br />
               Until then, view my research summary:
             </motion.p>
+
+            <motion.a
+              href="https://github.com/tmSreedarsh"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeIn('up', 0.45)}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className="inline-flex self-center lg:self-start items-center justify-center gap-2 rounded-full border border-accent px-4 py-2 mb-4 text-[10px] font-bold uppercase tracking-wide text-accent transition-colors hover:bg-accent hover:text-primary"
+            >
+              <FaGithub aria-hidden="true" />
+              Code, Apps &amp; Pipelines
+            </motion.a>
 
             {/* DOWNLOAD BUTTON */}
             <motion.div 

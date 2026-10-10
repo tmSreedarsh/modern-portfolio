@@ -39,7 +39,7 @@ const Nav = () => {
          - Mobile: h-[80px], justify-evenly (spreads items nicely)
          - Desktop: Wider sidebar (xl:w-24) to fit text
       */}
-      <div className="flex w-full xl:flex-col items-center justify-evenly xl:justify-center gap-y-8 px-4 md:px-40 xl:px-0 h-[80px] xl:h-max py-4 bg-white/10 backdrop-blur-sm text-2xl xl:text-xl xl:rounded-full">
+      <div className="flex w-full xl:flex-col items-center justify-evenly xl:justify-center gap-y-8 px-2 sm:px-4 md:px-8 xl:px-0 h-[80px] xl:h-max py-4 bg-white/10 backdrop-blur-sm text-2xl xl:text-xl xl:rounded-full">
         {navData.map((link, i) => {
           return (
             <Link

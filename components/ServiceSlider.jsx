@@ -43,6 +43,11 @@ export const serviceData = [
     title: "Geo-AI & ML",
     description: "Deep Learning for LULC and Burned Area Segmentation using Python.",
   },
+  {
+    icon: <RxCrop />,
+    title: "Crop Classification",
+    description: "Satellite-based crop mapping and classification with geospatial and machine learning workflows.",
+  },
  
   {
     icon: <RxReader />,

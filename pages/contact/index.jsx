@@ -60,7 +60,7 @@ const Contact = () => {
             {/* HIDDEN INPUT: Helps match the 'Subject' line in your email settings */}
             <input type="hidden" name="title" value="New Portfolio Inquiry" />
 
-            <div className="flex gap-x-6 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <input
                 type="text"
                 name="name"
