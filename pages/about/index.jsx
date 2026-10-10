@@ -504,9 +504,9 @@ const About = () => {
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
         <div className="shrink-0 w-full border-t border-white/10 pt-2 md:pt-3 pb-[calc(140px+env(safe-area-inset-bottom))] sm:pb-[calc(134px+env(safe-area-inset-bottom))] md:pb-[calc(118px+env(safe-area-inset-bottom))] lg:pb-[calc(114px+env(safe-area-inset-bottom))] xl:pb-10 z-50">
-            <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 items-start">
+            <div className="w-full max-w-[980px] mx-auto grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-1 sm:gap-2 md:gap-3 items-start">
                 
-                <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
+              <div className="pr-1 sm:pr-2 md:pr-4 border-r border-b border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start pb-2 sm:pb-0 sm:border-b-0">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={8} /> +
                     </div>
@@ -516,7 +516,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="px-1 sm:px-2 md:px-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
+                <div className="px-1 sm:px-2 md:px-4 border-b sm:border-r sm:border-b-0 border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start pb-2 sm:pb-0">
                     <div className="text-base sm:text-lg md:text-3xl font-extrabold text-accent mb-1 leading-none">
                         <CountUp start={0} end={3} duration={5} />
                     </div>
