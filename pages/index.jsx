@@ -44,9 +44,11 @@ const Home = () => {
             exit="hidden"
             className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-8 md:mb-10 lg:mb-16 text-sm md:text-base opacity-80"
           >
-            Geomatics Engineer with specialized expertise in Remote Sensing and Digital Image Processing.
-            I completed a 6-month internship at NRSC ISRO. Research enthusiast focused on geospatial applications,
-            spatial analysis, and hazard modeling.
+            I am a Geomatics Engineer with four years of practical experience in GIS and remote sensing, including a
+            six-month internship at NRSC, ISRO. My work applies geospatial methods to disaster management and forestry
+            challenges such as forest fires, landslides, floods, and coastal vulnerability. I use AI platforms for
+            vibe coding to quickly prototype tools, build smarter workflows, and automate repetitive tasks, giving me
+            more time to explore data and grow as a versatile researcher.
           </motion.p>
 
           {/* btn */}
