@@ -280,7 +280,7 @@ const About = () => {
     const deltaY = touch.clientY - touchStart.current.y;
 
     // Switch sections only for deliberate horizontal swipes on content.
-    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) {
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) {
       return;
     }
 
@@ -312,7 +312,7 @@ const About = () => {
       
       {/* Background Circles */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Circles />
+        <Circles animated={false} />
       </div>
 
       <div className="container mx-auto max-w-full h-full flex flex-col px-4 sm:px-6 md:px-8 xl:px-4 relative z-20">
@@ -323,14 +323,18 @@ const About = () => {
 
         {/* 2. MAIN CONTENT (Expands to fill space) */}
         {/* min-h-0 is CRITICAL: It allows the inner content to scroll while the parent stays fixed. */}
-        <div className="flex-1 flex flex-col min-h-0 w-full xl:max-w-[980px] xl:mx-auto">
+        <div
+          className="flex-1 flex flex-col min-h-0 w-full xl:max-w-[980px] xl:mx-auto"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
             
             {/* TABS ROW */}
-            <div data-swipe-ignore="true" className="shrink-0 mb-3 xl:mb-6">
+            <div className="shrink-0 mb-3 xl:mb-6">
                 <div className="md:hidden relative overflow-hidden">
                     <div
                       ref={mobileTabsScrollRef}
-                      className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-x gap-4 border-b border-white/10 pb-2 px-1"
+                      className="flex w-full max-w-full flex-nowrap overflow-x-auto overscroll-x-contain no-scrollbar touch-pan-y gap-4 border-b border-white/10 pb-2 px-1"
                     >
                       {aboutData.map((item, itemI) => (
                         <button
@@ -369,8 +373,6 @@ const About = () => {
 
                 <div
                   className="md:hidden mt-2 flex items-center justify-center"
-                  onTouchStart={handleTouchStart}
-                  onTouchEnd={handleTouchEnd}
                 >
                     <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2 py-1">
                         {aboutData.map((item, itemI) => (
@@ -400,9 +402,7 @@ const About = () => {
             {/* This div handles the scrolling. The counters below are OUTSIDE this div. */}
             <div
                 ref={contentScrollRef}
-                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-[72px] md:pb-4 touch-pan-y"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
+                className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar px-1 sm:px-2 md:px-3 pb-[72px] md:pb-[150px] xl:pb-24 touch-pan-y"
             >
                 <motion.div
                     key={index}
@@ -503,7 +503,7 @@ const About = () => {
         {/* 3. BOTTOM: COUNTERS */}
         {/* REMOVED: bg-primary (The solid color you hated) */}
         {/* ADDED: border-t (To visually separate it nicely) */}
-        <div className="fixed inset-x-0 bottom-[calc(80px+env(safe-area-inset-bottom))] z-40 w-full border-t border-white/10 bg-primary/70 px-4 pt-2 pb-2 backdrop-blur-sm md:static md:inset-auto md:z-50 md:bg-transparent md:px-0 md:pt-3 md:pb-3 md:backdrop-blur-none xl:pb-10">
+        <div className="fixed inset-x-0 bottom-[calc(80px+env(safe-area-inset-bottom))] z-40 w-full border-t border-white/10 bg-primary/70 px-4 pt-2 pb-2 backdrop-blur-sm xl:bottom-0 xl:bg-primary xl:px-6 xl:pt-3 xl:pb-3 xl:backdrop-blur-none">
             <div className="w-full max-w-[980px] mx-auto grid grid-cols-4 gap-x-1 sm:gap-2 md:gap-3 items-start">
                 
               <div className="pr-1 sm:pr-2 md:pr-4 border-r border-white/10 text-center min-h-[52px] sm:min-h-[58px] md:min-h-0 flex flex-col items-center justify-start">
