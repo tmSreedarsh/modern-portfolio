@@ -110,7 +110,7 @@ export const aboutData = [
     title: "Research Focus",
     info: [
       { title: "My Vision", stage: "Aspiring to be a Versatile Researcher", logo: FaBullseye },
-      { title: "Key Interests", stage: "Disaster Management, Spatial Analysis & Geo-AI" },
+      { title: "Key Interests", stage: "Disaster Management, Spatial Analysis, Crop Classification & Geo-AI" },
     ],
   },
   {
