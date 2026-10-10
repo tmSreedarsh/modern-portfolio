@@ -49,9 +49,9 @@ const Home = () => {
             exit="hidden"
             className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-8 md:mb-10 lg:mb-16 text-sm md:text-base opacity-80"
           >
-            Geospatial Analyst with four years of practical experience in GIS and remote sensing, including a
-            six-month internship at NRSC, ISRO. I use AI platforms for vibe coding to prototype tools and automate
-            repetitive tasks, leaving more time to explore data and grow as a <span className="font-semibold text-accent">versatile researcher</span>.
+            I am a geospatial postgraduate with four years of practical experience in GIS and remote sensing,
+            including a six-month internship at NRSC, ISRO. I use AI platforms for vibe coding to prototype tools and
+            automate repetitive tasks, giving me more time to explore data and grow as a <span className="font-semibold text-accent">versatile researcher</span>.
           </motion.p>
 
           <div className="max-w-xs md:max-w-sm lg:max-w-xl mx-auto lg:mx-0 mb-7">
